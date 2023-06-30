@@ -218,4 +218,11 @@ class ControladorHerramientas
     $respuesta = ModeloControlHerramientas::mdlHerramientas($herramienta);
     return $respuesta;
   }
+
+  static public function ctrPorHerramientas($id)
+  {
+    $respuesta = ModeloControlHerramientas::mdlPorHerramientas($id);
+    return $respuesta;
+  }
+  
 }

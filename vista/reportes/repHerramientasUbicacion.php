@@ -7,6 +7,7 @@ $id = $_GET["id"];
 
 
 $herra = ControladorHerramientas::ctrHerramientas($id);
+
 $today = getdate();
 
 
