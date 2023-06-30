@@ -223,9 +223,44 @@ function cambioEstadoMat(codSegMat){
         title: 'Error de Registro!!!',
         timer: 1500
       })
-       
     }
   }
 })
+}
+
+/* REPORTE DE VENTAS POR PERSONAL */
+function reporteHerramienta(){
+  var formData = new FormData($("#ReporteDeHerramientas")[0])
+
+  $.ajax({
+    type: "POST",
+    url: "controlador/controlherramientasControlador.php?ctrRepHerramientas",
+    data: formData,
+    cache: false,
+    contentType:false,
+    processData:false,
+    success: function (data) {
+      $("#repHerramientas").html(data)
+      /* console.log(data); */
+    }
+  })
+}
+
+function impHerramientaSelec(){
+  var formData = new FormData($("#FormHerramientaSeleccionado")[0]);
+  /* console.log(formData); */
+  $.ajax({
+    type: "POST",
+    /* url: "controlador/controlherramientasControlador.php?ctrRepHerramientas", */
+    url: "vista/reportes/repHerramientaSelec.php",
+    data: formData,
+    cache: false,
+    contentType:false,
+    processData:false,
+    success: function (data) {
+      /* $("#repHerramientas").html(data) */
+      console.log(data);
+    }
+  })
 }
 

@@ -75,6 +75,7 @@
           $_GET["ruta"] == "VControlHerramientas" ||
           $_GET["ruta"] == "BusTramite" ||
           $_GET["ruta"] == "VMarcaciones" ||
+          $_GET["ruta"] == "VRepHerramientas" ||
           $_GET["ruta"] == "salir" ) {
         $ruta=$_GET["ruta"].".php";
       }

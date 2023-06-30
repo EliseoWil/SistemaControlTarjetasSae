@@ -121,65 +121,88 @@ class ModeloControlHerramientas
     $stmt->null;
   }
 
-static public function mdlRegRegistrosControlHerramientas($data)
-{
-  $tipo = $data['registros']['type'];
-  $tamanio = $data['registros']['size'];
-  $archivotmp = $data['registros']['tmp_name'];
-  $lineas = file($archivotmp);
-  $i = 0;
-  foreach ($lineas as $linea) {
-    //$cantidad_registros = count($lineas);
-    //$cantidad_regist_agregados = ($cantidad_registros - 1);
+  static public function mdlRegRegistrosControlHerramientas($data)
+  {
+    $tipo = $data['registros']['type'];
+    $tamanio = $data['registros']['size'];
+    $archivotmp = $data['registros']['tmp_name'];
+    $lineas = file($archivotmp);
+    $i = 0;
+    foreach ($lineas as $linea) {
+      //$cantidad_registros = count($lineas);
+      //$cantidad_regist_agregados = ($cantidad_registros - 1);
 
-    //usamos el contador i para que no registre la primera fila
-    if ($i != 0) {
+      //usamos el contador i para que no registre la primera fila
+      if ($i != 0) {
 
-      $datos = explode(";", $linea);
+        $datos = explode(";", $linea);
 
-      $descripcion_controlherramientas = !empty($datos[0]) ? ($datos[0]) : '';
-      $pn_controlherramientas = !empty($datos[1]) ? ($datos[1]) : '';
-      $pnalt_controlherramientas = !empty($datos[2]) ? ($datos[2]) : '';
-      $numserie_controlherramientas = !empty($datos[3]) ? ($datos[3]) : '';
-      $codigo_controlherramientas = !empty($datos[4]) ? ($datos[4]) : '';
-      $marcaofabri_controlherramientas = !empty($datos[5]) ? ($datos[5]) : '';
-      $cantidad_controlherramientas = !empty($datos[6]) ? ($datos[6]) : '';
-      $unidad_controlherramientas = !empty($datos[7]) ? ($datos[7]) : '';
-      $ubicacion_controlherramientas = !empty($datos[8]) ? ($datos[8]) : '';
-      $fechacali_controlherramientas = !empty($datos[9]) ? ($datos[9]) : '';
-      $periodocali_controlherramientas = !empty($datos[10]) ? ($datos[10]) : '';
-      $fechavenci_controlherramientas = !empty($datos[11]) ? ($datos[11]) : '';
-      $estado_controlherramientas = !empty($datos[12]) ? ($datos[12]) : '';
-      $diasalerta_controlherramientas = !empty($datos[13]) ? ($datos[13]) : '';
-      $origencali_controlherramientas = !empty($datos[14]) ? ($datos[14]) : '';
-      $propiedad_controlherramientas = !empty($datos[15]) ? ($datos[15]) : '';
-      $numcarpeta_controlherramientas = !empty($datos[16]) ? ($datos[16]) : '';
-      $numcertifi_controlherramientas = !empty($datos[17]) ? ($datos[17]) : '';
-      $numregistro_controlherramientas = !empty($datos[18]) ? ($datos[18]) : '';
-      $alcanceinstru_controlherramientas = !empty($datos[19]) ? ($datos[19]) : '';
-      $resuinstru_controlherramientas = !empty($datos[20]) ? ($datos[20]) : '';
-      $ubicacionautorizada_controlherramientas = !empty($datos[21]) ? ($datos[21]) : '';
-      $docsalida_controlherramientas = !empty($datos[22]) ? ($datos[22]) : '';
+        $descripcion_controlherramientas = !empty($datos[0]) ? ($datos[0]) : '';
+        $pn_controlherramientas = !empty($datos[1]) ? ($datos[1]) : '';
+        $pnalt_controlherramientas = !empty($datos[2]) ? ($datos[2]) : '';
+        $numserie_controlherramientas = !empty($datos[3]) ? ($datos[3]) : '';
+        $codigo_controlherramientas = !empty($datos[4]) ? ($datos[4]) : '';
+        $marcaofabri_controlherramientas = !empty($datos[5]) ? ($datos[5]) : '';
+        $cantidad_controlherramientas = !empty($datos[6]) ? ($datos[6]) : '';
+        $unidad_controlherramientas = !empty($datos[7]) ? ($datos[7]) : '';
+        $ubicacion_controlherramientas = !empty($datos[8]) ? ($datos[8]) : '';
+        $fechacali_controlherramientas = !empty($datos[9]) ? ($datos[9]) : '';
+        $periodocali_controlherramientas = !empty($datos[10]) ? ($datos[10]) : '';
+        $fechavenci_controlherramientas = !empty($datos[11]) ? ($datos[11]) : '';
+        $estado_controlherramientas = !empty($datos[12]) ? ($datos[12]) : '';
+        $diasalerta_controlherramientas = !empty($datos[13]) ? ($datos[13]) : '';
+        $origencali_controlherramientas = !empty($datos[14]) ? ($datos[14]) : '';
+        $propiedad_controlherramientas = !empty($datos[15]) ? ($datos[15]) : '';
+        $numcarpeta_controlherramientas = !empty($datos[16]) ? ($datos[16]) : '';
+        $numcertifi_controlherramientas = !empty($datos[17]) ? ($datos[17]) : '';
+        $numregistro_controlherramientas = !empty($datos[18]) ? ($datos[18]) : '';
+        $alcanceinstru_controlherramientas = !empty($datos[19]) ? ($datos[19]) : '';
+        $resuinstru_controlherramientas = !empty($datos[20]) ? ($datos[20]) : '';
+        $ubicacionautorizada_controlherramientas = !empty($datos[21]) ? ($datos[21]) : '';
+        $docsalida_controlherramientas = !empty($datos[22]) ? ($datos[22]) : '';
 
-      if (!empty($numcarpeta_controlherramientas)) {
-        $mtr_duplicada = Conexion::conectar()->prepare("select numcarpeta_controlherramientas from control_herramientas where numcarpeta_controlherramientas='$numcarpeta_controlherramientas'");
-        $mtr_duplicada->execute();
-        $regDuplicado = $mtr_duplicada->rowCount();
+        if (!empty($numcarpeta_controlherramientas)) {
+          $mtr_duplicada = Conexion::conectar()->prepare("select numcarpeta_controlherramientas from control_herramientas where numcarpeta_controlherramientas='$numcarpeta_controlherramientas'");
+          $mtr_duplicada->execute();
+          $regDuplicado = $mtr_duplicada->rowCount();
+        }
+
+        if ($regDuplicado > 0) {
+
+          $stmt = Conexion::conectar()->prepare("update control_herramientas set descripcion_controlherramientas, pn_controlherramientas,pnalt_controlherramientas, numserie_controlherramientas, codigo_controlherramientas, marcaofabri_controlherramientas, cantidad_controlherramientas, unidad_controlherramientas, ubicacion_controlherramientas, fechacali_controlherramientas, periodocali_controlherramientas, fechavenci_controlherramientas, estado_controlherramientas, diasalerta_controlherramientas, origencali_controlherramientas, propiedad_controlherramientas, numcarpeta_controlherramientas, numcertifi_controlherramientas, numregistro_controlherramientas, alcanceinstru_controlherramientas, resuinstru_controlherramientas, ubicacionautorizada_controlherramientas, docsalida_controlherramientas where numcarpeta_controlherramientas='$numcarpeta_controlherramientas'");
+          $stmt->execute();
+        } else {
+          $stmt = Conexion::conectar()->prepare("insert into control_herramientas (descripcion_controlherramientas, pn_controlherramientas, pnalt_controlherramientas, numserie_controlherramientas, codigo_controlherramientas, marcaofabri_controlherramientas, cantidad_controlherramientas, unidad_controlherramientas, ubicacion_controlherramientas, fechacali_controlherramientas, periodocali_controlherramientas, fechavenci_controlherramientas, estado_controlherramientas, diasalerta_controlherramientas, origencali_controlherramientas, 	propiedad_controlherramientas, numcarpeta_controlherramientas, numcertifi_controlherramientas, numregistro_controlherramientas, alcanceinstru_controlherramientas, resuinstru_controlherramientas, ubicacionautorizada_controlherramientas, docsalida_controlherramientas) values('$descripcion_controlherramientas', '$pn_controlherramientas', '$pnalt_controlherramientas', '$numserie_controlherramientas', '$codigo_controlherramientas', '$marcaofabri_controlherramientas', '$cantidad_controlherramientas', '$unidad_controlherramientas', '$ubicacion_controlherramientas', '$fechacali_controlherramientas', '$periodocali_controlherramientas', '$fechavenci_controlherramientas', '$estado_controlherramientas', '$diasalerta_controlherramientas', '$origencali_controlherramientas', '$propiedad_controlherramientas', '$numcarpeta_controlherramientas', '$numcertifi_controlherramientas', '$numregistro_controlherramientas', '$alcanceinstru_controlherramientas', '$resuinstru_controlherramientas', '$ubicacionautorizada_controlherramientas', '$docsalida_controlherramientas')");
+          $stmt->execute();
+        }
       }
-
-      if ($regDuplicado > 0) {
-
-        $stmt = Conexion::conectar()->prepare("update control_herramientas set descripcion_controlherramientas, pn_controlherramientas,pnalt_controlherramientas, numserie_controlherramientas, codigo_controlherramientas, marcaofabri_controlherramientas, cantidad_controlherramientas, unidad_controlherramientas, ubicacion_controlherramientas, fechacali_controlherramientas, periodocali_controlherramientas, fechavenci_controlherramientas, estado_controlherramientas, diasalerta_controlherramientas, origencali_controlherramientas, propiedad_controlherramientas, numcarpeta_controlherramientas, numcertifi_controlherramientas, numregistro_controlherramientas, alcanceinstru_controlherramientas, resuinstru_controlherramientas, ubicacionautorizada_controlherramientas, docsalida_controlherramientas where numcarpeta_controlherramientas='$numcarpeta_controlherramientas'");
-        $stmt->execute();
-      } else {
-        $stmt = Conexion::conectar()->prepare("insert into control_herramientas (descripcion_controlherramientas, pn_controlherramientas, pnalt_controlherramientas, numserie_controlherramientas, codigo_controlherramientas, marcaofabri_controlherramientas, cantidad_controlherramientas, unidad_controlherramientas, ubicacion_controlherramientas, fechacali_controlherramientas, periodocali_controlherramientas, fechavenci_controlherramientas, estado_controlherramientas, diasalerta_controlherramientas, origencali_controlherramientas, 	propiedad_controlherramientas, numcarpeta_controlherramientas, numcertifi_controlherramientas, numregistro_controlherramientas, alcanceinstru_controlherramientas, resuinstru_controlherramientas, ubicacionautorizada_controlherramientas, docsalida_controlherramientas) values('$descripcion_controlherramientas', '$pn_controlherramientas', '$pnalt_controlherramientas', '$numserie_controlherramientas', '$codigo_controlherramientas', '$marcaofabri_controlherramientas', '$cantidad_controlherramientas', '$unidad_controlherramientas', '$ubicacion_controlherramientas', '$fechacali_controlherramientas', '$periodocali_controlherramientas', '$fechavenci_controlherramientas', '$estado_controlherramientas', '$diasalerta_controlherramientas', '$origencali_controlherramientas', '$propiedad_controlherramientas', '$numcarpeta_controlherramientas', '$numcertifi_controlherramientas', '$numregistro_controlherramientas', '$alcanceinstru_controlherramientas', '$resuinstru_controlherramientas', '$ubicacionautorizada_controlherramientas', '$docsalida_controlherramientas')");
-        $stmt->execute();
-      }
+      $i++;
     }
-    $i++;
+
+    return "ok";
   }
 
-  return "ok";
-}
+  static public function mdlRepHerramienta($data)
+  {
 
+    $nom = $data["nomHerramienta"];
+
+    $stmt = Conexion::conectar()->prepare("select * from control_herramientas
+    where ubicacion_controlherramientas='$nom'");
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+    $stmt->null;
+  }
+
+  static public function mdlHerramientas($data)
+  {
+
+    $stmt = Conexion::conectar()->prepare("select * from control_herramientas
+    where ubicacion_controlherramientas='$data'");
+    $stmt->execute();
+    return $stmt->fetchAll();
+    $stmt->close();
+    $stmt->null;
+  }
 }

@@ -125,6 +125,12 @@ with font-awesome or any other icon font library -->
                                         <p>Carcar registros</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="VRepHerramientas" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Reporte Herramientas</p>
+                                    </a>
+                                </li>
                             </ul>
 
                         </li>
