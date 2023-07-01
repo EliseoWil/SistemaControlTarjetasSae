@@ -280,7 +280,7 @@ function sumarMeses(){
   } else {
     console.log('El input de fecha está vacío');
   }
-
+/* s */
   console.log(periodoMes);
   console.log(fechaCal);
   
