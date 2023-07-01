@@ -215,5 +215,15 @@ class ModeloControlHerramientas
     $stmt->close();
     $stmt->null;
   }
-  
+
+  static public function mdlSelecHerramientas($id)
+  {
+
+    $stmt = Conexion::conectar()->prepare("select * from control_herramientas
+      where id_controlherramientas=$id");
+    $stmt->execute();
+    return $stmt->fetch();
+    $stmt->close();
+    $stmt->null;
+  }
 }

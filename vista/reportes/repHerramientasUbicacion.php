@@ -65,12 +65,20 @@ $pdf->MultiCell(14, 4, utf8_decode('No CARPETA'), 1, 0, 'C', true);
 $pdf->SetFont("Helvetica", "", 7);
 
 $pdf->setTextColor(0, 0, 0);
+
+function limitar_cadena($cadena, $limite, $sufijo){
+	if(strlen($cadena) > $limite){
+		return substr($cadena, 0, $limite) . $sufijo;
+	}
+	return $cadena;
+}
+
 foreach ($herra as $value) {
     $pdf->setX(8);
     $pdf->Cell(10, 8, utf8_decode($value["id_controlherramientas"]), 1, 0);
 
     $pdf->SetFont("times", "", 6);
-    $pdf->Cell(44, 8, $value["descripcion_controlherramientas"], 1, 0);
+    $pdf->Cell(44, 8, limitar_cadena($value["descripcion_controlherramientas"], 32, "..."), 1, 0);
     $pdf->setX(62);
 
     $pdf->SetFont("times", "", 7);

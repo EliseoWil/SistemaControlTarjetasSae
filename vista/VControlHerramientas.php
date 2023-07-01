@@ -7,7 +7,7 @@
                   <div class="col-sm-5">
                       <h3 class="m-0">Panel Control Herramientas</h3>
                   </div><!-- /.col -->
-                  <div class="col-sm-7" >
+                  <div class="col-sm-7">
                       <div class="form-group col-sm-12" style="text-align: end;">
                           <!-- <button type="button" class="btn btn-primary bg-info" onclick="impHerramientaSelec()">Imprimir Herramientas</button> -->
                       </div>
@@ -17,26 +17,26 @@
       </div>
       <div class="content">
           <div class="container-fluid">
-              <table id="DataTableControlHerramientas" class="table table-bordered table-striped">
-                  <thead>
-                      <button class="btn btn-success" onclick="MCargarRegistrosControlHerramientas()">Importar Excel</button>
-                      <tr>
-                          <th></th>
-                          <th>ITEM</th>
-                          <th>DESCRIPCION</th>
-                          <th>NUMERO DE PARTE</th>
-                          <th>NUMERO DE SERIE</th>
-                          <th>CODIGO</th>
-                          <th>UBICACION</th>
-                          <th>FECHA VENCIMIENTO</th>
-                          <th>N° CARPETA</th>
-                          <td>
-                              <button class="btn btn-primary" onclick="MNuevoControlHerramientas()">Agregar</button>
-                          </td>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <form action="" id="FormHerramientaSeleccionado">
+              <form id="FormHerramientaSeleccionado" method="POST" action="vista/reportes/repHerramientaSelec.php" target="_blank">
+                  <table id="DataTableControlHerramientas" class="table table-bordered table-striped">
+                      <thead>
+                          <button class="btn btn-success" onclick="MCargarRegistrosControlHerramientas()">Importar Excel</button>
+                          <tr>
+                              <th></th>
+                              <th>ITEM</th>
+                              <th>DESCRIPCION</th>
+                              <th>NUMERO DE PARTE</th>
+                              <th>NUMERO DE SERIE</th>
+                              <th>CODIGO</th>
+                              <th>UBICACION</th>
+                              <th>FECHA VENCIMIENTO</th>
+                              <th>N° CARPETA</th>
+                              <td>
+                                  <button class="btn btn-primary" onclick="MNuevoControlHerramientas()">Agregar</button>
+                              </td>
+                          </tr>
+                      </thead>
+                      <tbody>
                           <?php
                             $controlherramienta = ControladorHerramientas::ctrInfoControlHerramientas();
                             $idHerra = 0;
@@ -44,7 +44,7 @@
                                 $idHerra = $idHerra + 1;
                             ?>
                               <tr>
-                                  <td><input type="checkbox" id="inlineCheckbox<?php echo $idHerra?>" name="idclase[]" value="<?php echo $value["id_controlherramientas"] ?>"></td>
+                                  <td><input type="checkbox" id="inlineCheckbox4" name="idclase[]" value="<?php echo $value["id_controlherramientas"] ?>"></td>
 
                                   <td><?php echo $value["id_controlherramientas"]; ?></td>
                                   <td><?php echo $value["descripcion_controlherramientas"]; ?></td>
@@ -73,11 +73,11 @@
                           <?php
                             }
                             ?>
-                            <button type="button" class="btn btn-primary bg-info" onclick="impHerramientaSelec()">Imprimir Herramientas</button>
-                      </form>
-                  </tbody>
-
-              </table>
+                         <!--  <button type="button" class="btn btn-primary bg-dark" onclick="impHerramientaSelec()">Enviar Selección</button> -->
+                          <button type="submit" class="btn btn-primary bg-dark" style="border: none;">Imprimir Selección</button>
+                      </tbody>
+                  </table>
+              </form>
           </div><!-- /.container-fluid -->
       </div>
       <!-- /.content -->
