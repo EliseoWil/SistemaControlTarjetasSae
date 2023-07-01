@@ -268,3 +268,21 @@ function impHerramientaSelec() {
   })
 }
 
+function sumarMeses(){
+  var periodoMes = document.getElementById('periodocalControlHerramientas').value
+  /* var fechaCal = document.getElementById('fechacalControlHerramientas').value */
+  
+  
+  var dateInput = document.getElementById('fechacalControlHerramientas'); // Reemplaza 'myDateInput' con el ID de tu elemento <input>
+
+  if (dateInput.value !== '') {
+    console.log('El input de fecha tiene un valor');
+  } else {
+    console.log('El input de fecha está vacío');
+  }
+
+  console.log(periodoMes);
+  console.log(fechaCal);
+  
+}
+
